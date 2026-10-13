@@ -1,117 +1,142 @@
 package com.example.redpatriominalsantiago.view
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.activity.compose.LocalActivity
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Church
-import androidx.compose.material.icons.filled.Explore
-import androidx.compose.material.icons.filled.Map
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.redpatriominalsantiago.ui.theme.BlancoSuave
+import androidx.core.view.WindowCompat
+import com.example.redpatriominalsantiago.R
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
-import com.example.redpatriominalsantiago.ui.theme.Crema
 import com.example.redpatriominalsantiago.ui.theme.Dorado
+import com.example.redpatriominalsantiago.ui.theme.DoradoContenedor
+import com.example.redpatriominalsantiago.ui.theme.Lora
+import com.example.redpatriominalsantiago.ui.theme.RedPatriominalSantiagoTheme
+import kotlinx.coroutines.launch
 
 private data class PaginaIntro(
-    val icono: ImageVector,
-    val titulo: String,
-    val subtitulo: String,
-    val descripcion: String
+    @param:DrawableRes val icono: Int,
+    @param:StringRes val titulo: Int,
+    @param:StringRes val subtitulo: Int,
+    @param:StringRes val descripcion: Int
 )
 
 private val paginas = listOf(
     PaginaIntro(
-        Icons.Filled.Church,
-        "Red Patrimonial",
-        "de Santiago",
-        "Descubre el patrimonio sagrado de la arquidiócesis, más allá de la Plaza de Armas."
+        R.drawable.ic_church,
+        R.string.intro_1_titulo,
+        R.string.intro_1_subtitulo,
+        R.string.intro_1_descripcion
     ),
     PaginaIntro(
-        Icons.Filled.Map,
-        "Explora el mapa",
-        "templos, museos y archivos",
-        "Encuentra en terreno los templos cercanos y revisa sus horarios en tiempo real."
+        R.drawable.ic_pin,
+        R.string.intro_2_titulo,
+        R.string.intro_2_subtitulo,
+        R.string.intro_2_descripcion
     ),
     PaginaIntro(
-        Icons.Filled.Explore,
-        "Planifica tu ruta",
-        "para colegios y turistas",
-        "Arma recorridos con paradas, tiempos estimados y guías voluntarios."
+        R.drawable.ic_route,
+        R.string.intro_3_titulo,
+        R.string.intro_3_subtitulo,
+        R.string.intro_3_descripcion
     )
 )
 
-// ---------- Pantalla principal ----------
-@OptIn(ExperimentalFoundationApi::class)
+// Figma · 01 Splash, como introducción de tres páginas que se deslizan.
+// "Siguiente" avanza de página y en la última abre la bienvenida.
 @Composable
-fun PantallaPrincipal() {
+fun PantallaPrincipal(onContinuar: () -> Unit, modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState(pageCount = { paginas.size })
+    val scope = rememberCoroutineScope()
+    IconosDeSistemaClaros()
 
-    Box(
-        modifier = Modifier
+    Column(
+        modifier = modifier
             .fillMaxSize()
             .background(Burdeo)
+            .systemBarsPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Páginas que se deslizan hacia los lados
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
         ) { indice ->
             ContenidoPagina(paginas[indice])
         }
 
-        // Indicadores + pie de página
+        // Botón + indicadores + pie de página
         Column(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .navigationBarsPadding()
-                .padding(bottom = 16.dp),
+            modifier = Modifier.padding(bottom = 40.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            FilledTonalButton(
+                onClick = {
+                    if (pagerState.currentPage < paginas.lastIndex) {
+                        scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                    } else {
+                        onContinuar()
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
+                    .height(48.dp)
+            ) {
+                Text(stringResource(R.string.intro_siguiente))
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 repeat(paginas.size) { i ->
                     val activo = pagerState.currentPage == i
                     Box(
-                        modifier = Modifier
-                            .size(10.dp)
-                            .clip(CircleShape)
+                        Modifier
+                            .size(8.dp)
                             .background(
-                                if (activo) Color.White else Color.White.copy(alpha = 0.4f)
+                                Color.White.copy(alpha = if (activo) 1f else 0.5f),
+                                CircleShape
                             )
                     )
                 }
             }
-            Spacer(Modifier.height(14.dp))
             Text(
-                text = "Área de Cultura · Arzobispado de Santiago",
-                color = BlancoSuave.copy(alpha = 0.7f),
-                fontSize = 13.sp
+                text = stringResource(R.string.intro_pie),
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Normal,
+                color = Color.White.copy(alpha = 0.7f)
             )
         }
     }
@@ -122,62 +147,66 @@ private fun ContenidoPagina(pagina: PaginaIntro) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp)
-            .padding(bottom = 80.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(horizontal = 32.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp, Alignment.CenterVertically),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
             modifier = Modifier
-                .size(140.dp)
-                .clip(CircleShape)
-                .background(Dorado),
+                .size(112.dp)
+                .background(Dorado, CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = pagina.icono,
+                painter = painterResource(pagina.icono),
                 contentDescription = null,
                 tint = Color.White,
-                modifier = Modifier.size(72.dp)
+                modifier = Modifier.size(60.dp)
             )
         }
-
-        Spacer(Modifier.height(28.dp))
-
         Text(
-            text = pagina.titulo,
+            text = stringResource(pagina.titulo),
+            style = MaterialTheme.typography.headlineLarge,
             color = Color.White,
-            fontFamily = FontFamily.Serif,
-            fontWeight = FontWeight.Bold,
-            fontSize = 36.sp,
             textAlign = TextAlign.Center
         )
-
-        Spacer(Modifier.height(16.dp))
-
         Text(
-            text = pagina.subtitulo,
-            color = Crema,
-            fontFamily = FontFamily.Serif,
+            text = stringResource(pagina.subtitulo),
+            fontFamily = Lora,
             fontStyle = FontStyle.Italic,
-            fontSize = 26.sp,
+            fontSize = 22.sp,
+            color = DoradoContenedor,
             textAlign = TextAlign.Center
         )
-
-        Spacer(Modifier.height(20.dp))
-
         Text(
-            text = pagina.descripcion,
-            color = BlancoSuave,
-            fontSize = 17.sp,
-            lineHeight = 24.sp,
-            textAlign = TextAlign.Center
+            text = stringResource(pagina.descripcion),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.White.copy(alpha = 0.85f),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.width(260.dp)
         )
     }
 }
 
-@Preview(showSystemUi = true)
+// El fondo burdeo necesita la hora y los íconos de sistema en blanco; al salir vuelven a oscuro
+@Composable
+private fun IconosDeSistemaClaros() {
+    val window = LocalActivity.current?.window ?: return
+    DisposableEffect(window) {
+        val barras = WindowCompat.getInsetsController(window, window.decorView)
+        barras.isAppearanceLightStatusBars = false
+        barras.isAppearanceLightNavigationBars = false
+        onDispose {
+            barras.isAppearanceLightStatusBars = true
+            barras.isAppearanceLightNavigationBars = true
+        }
+    }
+}
+
+@Preview(widthDp = 360, heightDp = 800)
 @Composable
 private fun PreviewPantallaPrincipal() {
-    PantallaPrincipal()
+    RedPatriominalSantiagoTheme {
+        PantallaPrincipal(onContinuar = {})
+    }
 }

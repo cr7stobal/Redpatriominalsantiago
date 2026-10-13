@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Red patriominal santiago</string>
+
+    <!-- 01 · Introducción (Splash) -->
+    <string name="intro_1_titulo">Red Patrimonial</string>
+    <string name="intro_1_subtitulo">de Santiago</string>
+    <string name="intro_1_descripcion">Descubre el patrimonio sagrado de la arquidiócesis, más allá de la Plaza de Armas.</string>
+    <string name="intro_2_titulo">Explora el mapa</string>
+    <string name="intro_2_subtitulo">templos, museos y archivos</string>
+    <string name="intro_2_descripcion">Encuentra en terreno los templos cercanos y revisa sus horarios en tiempo real.</string>
+    <string name="intro_3_titulo">Planifica tu ruta</string>
+    <string name="intro_3_subtitulo">para colegios y turistas</string>
+    <string name="intro_3_descripcion">Arma recorridos con paradas, tiempos estimados y guías voluntarios.</string>
+    <string name="intro_siguiente">Siguiente</string>
+    <string name="intro_pie">Área de Cultura · Arzobispado de Santiago</string>
+
+    <!-- 02 · Bienvenida y selección de perfil -->
+    <string name="bienvenida_titulo">Bienvenido</string>
+    <string name="bienvenida_descripcion">Elige cómo usarás la Red Patrimonial para personalizar tu experiencia.</string>
+    <string name="perfil_turista">Turista</string>
+    <string name="perfil_turista_descripcion">Explora templos y rutas por tu cuenta</string>
+    <string name="perfil_colegio">Colegio / Delegación</string>
+    <string name="perfil_colegio_descripcion">Planifica y agenda salidas pedagógicas</string>
+    <string name="perfil_encargado">Encargado de templo</string>
+    <string name="perfil_encargado_descripcion">Publica horarios, eventos y avisos</string>
+    <string name="campo_correo">Correo electrónico</string>
+    <string name="campo_contrasena">Contraseña</string>
+    <string name="bienvenida_ingresar">Ingresar</string>
+    <string name="bienvenida_invitado">Continuar como invitado</string>
+    <string name="bienvenida_pie" formatted="false">Prototipo académico · datos 100% ficticios</string>
 </resources>

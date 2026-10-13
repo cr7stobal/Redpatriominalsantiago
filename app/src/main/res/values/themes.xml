@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.RedPatriominalSantiago" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.RedPatriominalSantiago" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/fondo_crema</item>
+        <!-- Mismo fondo que la pantalla Splash para que el arranque no parpadee -->
+        <item name="android:windowSplashScreenBackground">@color/burdeo</item>
+    </style>
 </resources>
