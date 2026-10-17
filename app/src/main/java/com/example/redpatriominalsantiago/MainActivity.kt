@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.redpatriominalsantiago.ui.theme.RedPatriominalSantiagoTheme
+import com.example.redpatriominalsantiago.view.PantallaIniciarSesion
 import com.example.redpatriominalsantiago.view.PantallaPrincipal
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RedPatriominalSantiagoTheme {
-                PantallaPrincipal()
+                PantallaIniciarSesion()
             }
         }
     }
