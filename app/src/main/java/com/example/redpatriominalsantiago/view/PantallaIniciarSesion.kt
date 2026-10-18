@@ -2,8 +2,10 @@ package com.example.redpatriominalsantiago.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -88,8 +90,26 @@ fun PantallaIniciarSesion(
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier.fillMaxSize().padding(50.dp)
     ) {
+        if(iniciarSesionViewModel.textoVisible){
+        Text(
+            text = "Credenciales incorrectas",
+            color = Color.Red
+        )
+        }
+        Spacer(
+            modifier = Modifier.height(15.dp)
+        )
         Button(
-            onClick = {},
+            onClick = {
+                iniciarSesionViewModel.textoVisible = false
+                val validador = iniciarSesionViewModel.login()
+
+                if (validador){
+                    // vamos a otra pantalla (aqui va el navController)
+                }else {
+                    iniciarSesionViewModel.textoVisible = true
+                }
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Burdeo,
                 contentColor = Color.White
@@ -99,7 +119,10 @@ fun PantallaIniciarSesion(
             Text(text = "Ingresar")
         }
         TextButton(
-            onClick = { }
+            onClick = {
+                println("Boton Invitado presionado...")
+            },
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Continuar como invitado", color = Burdeo)
         }

@@ -36,6 +36,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.ui.theme.BlancoSuave
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
 import com.example.redpatriominalsantiago.ui.theme.Crema
@@ -73,8 +75,7 @@ private val paginas = listOf(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PantallaPrincipal(
-    onOmitir: () -> Unit,
-    onComenzar: () -> Unit
+    navController: NavController
 ) {
     val pagerState = rememberPagerState(pageCount = { paginas.size })
 
@@ -93,7 +94,7 @@ fun PantallaPrincipal(
 
         // Botón Omitir (después del pager para que quede encima)
         TextButton(
-            onClick = onOmitir,
+            onClick = {navController.navigate(Routes.LOGIN)},
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .statusBarsPadding()
