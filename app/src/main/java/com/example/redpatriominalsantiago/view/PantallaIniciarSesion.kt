@@ -22,13 +22,18 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
+import com.example.redpatriominalsantiago.ui.theme.Crema
+import com.example.redpatriominalsantiago.ui.theme.Dorado
 import com.example.redpatriominalsantiago.viewmodel.IniciarSesionViewModel
 
 
 @Composable
 fun PantallaIniciarSesion(
-    iniciarSesionViewModel: IniciarSesionViewModel = viewModel()
+    iniciarSesionViewModel: IniciarSesionViewModel = viewModel(),
+    navController: NavController
 ) {
     // ELEJIR CON QUE USUARIO INGRESAR
     Column(
@@ -54,7 +59,7 @@ fun PantallaIniciarSesion(
             fontWeight = FontWeight.Bold,
         )
     }
-    // INGRESAR MAIL Y CONTRASENA
+    // INGRESAR MAIL, CONTRASENA Y CREAR USUARIO
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -82,32 +87,41 @@ fun PantallaIniciarSesion(
             },
             modifier = Modifier.fillMaxWidth()
         )
+        TextButton(
+            onClick = {navController.navigate(Routes.REGISTER)},
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Dorado,
+                contentColor = Crema
+            ),
+        ) {
+            Text(
+                text = "Crear Usuario"
+            )
+        }
 
     }
-    // BOTONES
+    // BOTONES Ingresar, invitado
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier.fillMaxSize().padding(50.dp)
     ) {
-        if(iniciarSesionViewModel.textoVisible){
-        Text(
-            text = "Credenciales incorrectas",
-            color = Color.Red
-        )
+        if (iniciarSesionViewModel.textoVisible) {
+            Text(
+                text = iniciarSesionViewModel.mensajeError,
+                color = Color.Red
+            )
         }
         Spacer(
             modifier = Modifier.height(15.dp)
         )
         Button(
             onClick = {
-                iniciarSesionViewModel.textoVisible = false
-                val validador = iniciarSesionViewModel.login()
-
-                if (validador){
-                    // vamos a otra pantalla (aqui va el navController)
-                }else {
-                    iniciarSesionViewModel.textoVisible = true
+                iniciarSesionViewModel.login {
+                    // Aquí va la pantalla que sigue después del login, por ejemplo:
+                    // navController.navigate(Routes.MAPA)
+                    println("Login correcto")
                 }
             },
             colors = ButtonDefaults.buttonColors(

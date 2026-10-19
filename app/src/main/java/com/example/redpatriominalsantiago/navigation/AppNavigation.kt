@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.redpatriominalsantiago.view.PantallaCrearUsuario
 import com.example.redpatriominalsantiago.view.PantallaIniciarSesion
 import com.example.redpatriominalsantiago.view.PantallaPrincipal
 
@@ -16,6 +17,7 @@ fun AppNavigation() {
         startDestination = Routes.PRESENTACION
     ){
         composable(Routes.PRESENTACION) { PantallaPrincipal(navController) }
-        composable(Routes.LOGIN) {PantallaIniciarSesion()}
+        composable(Routes.LOGIN) {PantallaIniciarSesion(navController = navController)}
+        composable(Routes.REGISTER) { PantallaCrearUsuario(navController = navController) }
     }
 }
