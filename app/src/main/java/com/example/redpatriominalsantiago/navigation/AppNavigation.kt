@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.redpatriominalsantiago.view.PantallaIniciarSesion
 import com.example.redpatriominalsantiago.view.PantallaPrincipal
+import com.example.redpatriominalsantiago.view.PantallaRegistro
 
 @Composable
 fun AppNavigation() {
@@ -16,6 +17,7 @@ fun AppNavigation() {
         startDestination = Routes.PRESENTACION
     ){
         composable(Routes.PRESENTACION) { PantallaPrincipal(navController) }
-        composable(Routes.LOGIN) {PantallaIniciarSesion()}
+        composable(Routes.LOGIN) {PantallaIniciarSesion(navController = navController)}
+        composable(Routes.REGISTER) { PantallaRegistro(navController) }
     }
 }

@@ -19,13 +19,14 @@ class IniciarSesionViewModel: ViewModel() {
         pass = nuevaContrasena
     }
 
-    val usuarioCorrecto = Usuario("admin@gmail.com", "123")
+    //val usuarioCorrecto = Usuario("admin@gmail.com", "123")
 
     fun login(): Boolean {
         var validador = false
+        /*
         if (mail == usuarioCorrecto.mail && pass == usuarioCorrecto.pass) {
             validador = true
-        }
+        }*/
         return validador
     }
 }

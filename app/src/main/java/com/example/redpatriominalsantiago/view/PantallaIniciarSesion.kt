@@ -1,12 +1,19 @@
 package com.example.redpatriominalsantiago.view
 
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Church
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -22,39 +29,82 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
 import com.example.redpatriominalsantiago.viewmodel.IniciarSesionViewModel
+import androidx.compose.material3.Icon
+
 
 
 @Composable
 fun PantallaIniciarSesion(
-    iniciarSesionViewModel: IniciarSesionViewModel = viewModel()
+    iniciarSesionViewModel: IniciarSesionViewModel = viewModel(),
+    navController: NavController
 ) {
+    Column() {
+
+    }
+
     // ELEJIR CON QUE USUARIO INGRESAR
     Column(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top,
         modifier = Modifier.fillMaxSize().padding(50.dp)
     ) {
-        Text(
-            text = "Turista",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 30.dp)
-        )
-        Text(
-            text = "Colegio / Delegacion",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 30.dp)
-        )
-        Text(
-            text = "Encargado templo",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-        )
+        Row(
+        ) {
+            Text(
+                "Bienvenido",
+                fontSize = 30.sp,
+                color = Burdeo,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Row() {
+            Text("Elige cómo usarás la Red Patrimonial para personalizar tu experiencia.")
+        }
+        Row(
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = null
+            )
+            Text(
+                text = "Turista",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 30.dp)
+            )
+
+        }
+        Row() {
+            Icon(
+                imageVector = Icons.Filled.School,
+                contentDescription = null
+            )
+            Text(
+                text = "Colegio / Delegacion",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 30.dp)
+            )
+        }
+        Row() {
+            Icon(
+                imageVector = Icons.Filled.Church,
+                contentDescription = null
+            )
+            Text(
+                text = "Encargado templo",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
     }
-    // INGRESAR MAIL Y CONTRASENA
+    // INGRESAR MAIL, CONTRASENA y registrarse
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -82,7 +132,25 @@ fun PantallaIniciarSesion(
             },
             modifier = Modifier.fillMaxWidth()
         )
-
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "No tienes cuenta?",
+                fontSize = 16.sp
+            )
+            TextButton(
+                onClick = {
+                    navController.navigate(Routes.REGISTER)
+                }
+            ) {
+                Text(
+                    text = "Registrate",
+                    fontSize = 16.sp,
+                    color = Burdeo
+                )
+            }
+        }
     }
     // BOTONES
     Column(
