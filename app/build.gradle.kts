@@ -58,4 +58,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
     implementation(libs.androidx.room3.runtime)
     ksp(libs.androidx.room3.compiler)
+    implementation(libs.zxing.core)   // genera los códigos QR
 }

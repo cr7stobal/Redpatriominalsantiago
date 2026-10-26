@@ -8,9 +8,12 @@ import com.example.redpatriominalsantiago.view.PantallaAgenda
 import com.example.redpatriominalsantiago.view.PantallaFichaTemplo
 import com.example.redpatriominalsantiago.view.PantallaIniciarSesion
 import com.example.redpatriominalsantiago.view.PantallaMapa
+import com.example.redpatriominalsantiago.view.PantallaPerfil
 import com.example.redpatriominalsantiago.view.PantallaPermisoUbicacion
+import com.example.redpatriominalsantiago.view.PantallaQrInvitado
 import com.example.redpatriominalsantiago.view.PantallaPrincipal
 import com.example.redpatriominalsantiago.view.PantallaRegistro
+import com.example.redpatriominalsantiago.view.PantallaRutas
 
 @Composable
 fun AppNavigation() { // mapa de la app
@@ -32,5 +35,8 @@ fun AppNavigation() { // mapa de la app
             PantallaFichaTemplo(navController, id)
         }
         composable(Routes.AGENDA) { PantallaAgenda(navController) }    // 06 · Agenda cultural
+        composable(Routes.RUTAS) { PantallaRutas(navController) }      // 07 · Constructor de ruta
+        composable(Routes.PERFIL) { PantallaPerfil(navController) }    // perfil del invitado
+        composable(Routes.QR_INVITADO) { PantallaQrInvitado(navController) }   // pase QR
     }
 }

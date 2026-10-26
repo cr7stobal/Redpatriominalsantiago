@@ -60,18 +60,14 @@ fun BarraInferiorTurista(
         )
         NavigationBarItem(
             selected = seleccionada == "Rutas",
-            onClick = {
-                // Pendiente: pantalla 07 · Constructor de ruta
-            },
+            onClick = { irA(Routes.RUTAS) },
             icon = { Icon(Icons.Outlined.Route, contentDescription = null) },
             label = { Text("Rutas") },
             colors = colores
         )
         NavigationBarItem(
             selected = seleccionada == "Perfil",
-            onClick = {
-                // Pendiente: pantalla de perfil
-            },
+            onClick = { irA(Routes.PERFIL) },
             icon = { Icon(Icons.Outlined.Person, contentDescription = null) },
             label = { Text("Perfil") },
             colors = colores

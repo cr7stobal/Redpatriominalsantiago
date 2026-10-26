@@ -34,7 +34,8 @@ object TemploRepository {
             anio = "1955",
             estilo = "Moderno",
             guias = 1,
-            mapaX = 230, mapaY = 184
+            mapaX = 230, mapaY = 184,
+            minutosVisita = 20
         ),
         Templo(
             id = 3,
@@ -48,7 +49,8 @@ object TemploRepository {
             anio = "1998",
             estilo = "Contemporáneo",
             guias = 3,
-            mapaX = 184, mapaY = 438
+            mapaX = 184, mapaY = 438,
+            minutosVisita = 45
         ),
         Templo(
             id = 4,

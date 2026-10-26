@@ -14,5 +14,6 @@ data class Templo(
     val estilo: String,       // estilo arquitectónico
     val guias: Int,           // guías voluntarios disponibles
     val mapaX: Int,           // posición del pin en el mapa dibujado (en dp)
-    val mapaY: Int
+    val mapaY: Int,
+    val minutosVisita: Int = 30   // duración sugerida de la visita (si no se indica, 30 min)
 )

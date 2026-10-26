@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.ui.theme.BlancoSuave
 import com.example.redpatriominalsantiago.ui.theme.BordeSuave
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
@@ -120,7 +121,8 @@ fun PantallaFichaTemplo(
                 }
                 Button(
                     onClick = {
-                        // Pendiente: agregar a la ruta (pantalla 07)
+                        fichaViewModel.agregarARuta(templo)     // lo suma a la ruta
+                        navController.navigate(Routes.RUTAS)    // y muestra la ruta
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Crema, contentColor = Color(0xFF4A3700)),
                     modifier = Modifier
