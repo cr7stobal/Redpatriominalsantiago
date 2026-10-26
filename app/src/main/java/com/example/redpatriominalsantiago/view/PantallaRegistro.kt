@@ -11,15 +11,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,13 +26,12 @@ import androidx.navigation.NavController
 import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
 import com.example.redpatriominalsantiago.ui.theme.Crema
-import com.example.redpatriominalsantiago.ui.theme.Dorado
 
 
 @Composable
 fun PantallaRegistro(
-navController: NavController
-){
+    navController: NavController
+) {
     Scaffold(
         topBar = {
             Box(
@@ -56,68 +50,72 @@ navController: NavController
                 )
             }
         }
-) { innerPadding ->
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)
-    )
-}
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize().padding(24.dp)
-    ) {
-        Text(
-            "Registro",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Burdeo
-        )
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = {
-                Text("Nombre")
-            },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = {
-                Text("Corre electronico")
-            },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = {
-                Text("Contrasena")
-            },
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = {
-                Text("Confirmar contrasena")
-            },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(
-            modifier = Modifier.height(15.dp)
-        )
-        Button(
-            onClick = {navController.navigate(Routes.LOGIN)},
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Burdeo,
-                contentColor = Color.White
-            )
+    ) { innerPadding ->
+        // El formulario va DENTRO del Scaffold para respetar la barra superior
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)   // espacio que reserva la barra superior
+                .padding(24.dp)
         ) {
-            Text("Crear usuario")
-        }
-    }
-}
+            Text(
+                "Registro",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Burdeo
+            )
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                label = {
+                    Text("Nombre")
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                label = {
+                    Text("Correo electronico")
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                label = {
+                    Text("Contraseña")
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                label = {
+                    Text("Confirmar contraseña")
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(
+                modifier = Modifier.height(15.dp)
+            )
+            Button(
+                onClick = { navController.navigate(Routes.LOGIN) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Burdeo,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    "Crear usuario",
+                    fontSize = 18.sp
+                )
+            }
+        }   // cierra la Column
+    }       // cierra el contenido del Scaffold
+}           // cierra la función PantallaRegistro

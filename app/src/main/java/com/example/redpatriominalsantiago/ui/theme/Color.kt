@@ -25,3 +25,14 @@ val RosaSeleccion = Color(0xFFFFD9DC)
 val BeigeIcono = Color(0xFFF0E4DF)
 
 val BordeSuave = Color(0xFFE3D3CE)
+
+// Colores del mapa dibujado
+val FondoMapa = Color(0xFFEFE8DC)
+val VerdeParque = Color(0xFFD6E6C8)
+val AzulRio = Color(0xFFCDE0EC)
+val AzulUsuario = Color(0xFF1E6FE0)
+
+// Color del pin según el estado del templo
+val VerdeAbierto = Color(0xFF2E7D32)
+val GrisCerrado = Color(0xFF6B6B6B)
+val MoradoCelebracion = Color(0xFF6A3DA0)
