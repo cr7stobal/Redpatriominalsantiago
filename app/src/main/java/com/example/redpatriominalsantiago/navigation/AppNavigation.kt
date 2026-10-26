@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.redpatriominalsantiago.view.PantallaAgenda
+import com.example.redpatriominalsantiago.view.PantallaEscanerQr
 import com.example.redpatriominalsantiago.view.PantallaFichaTemplo
 import com.example.redpatriominalsantiago.view.PantallaIniciarSesion
 import com.example.redpatriominalsantiago.view.PantallaMapa
@@ -38,5 +39,6 @@ fun AppNavigation() { // mapa de la app
         composable(Routes.RUTAS) { PantallaRutas(navController) }      // 07 · Constructor de ruta
         composable(Routes.PERFIL) { PantallaPerfil(navController) }    // perfil del invitado
         composable(Routes.QR_INVITADO) { PantallaQrInvitado(navController) }   // pase QR
+        composable(Routes.ESCANER_QR) { PantallaEscanerQr(navController) }     // lector QR de templos
     }
 }

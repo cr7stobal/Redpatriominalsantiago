@@ -11,4 +11,5 @@ object Routes {  // Creador de pantallas exquisito
     const val RUTAS = "rutas"                           // 07 · Constructor de ruta
     const val PERFIL = "perfil"                         // perfil del invitado
     const val QR_INVITADO = "qr_invitado"               // pase QR de 10 minutos para los tótems
+    const val ESCANER_QR = "escaner_qr"                 // leer el QR de un templo
 }

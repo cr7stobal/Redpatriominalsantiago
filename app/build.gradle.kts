@@ -59,4 +59,5 @@ dependencies {
     implementation(libs.androidx.room3.runtime)
     ksp(libs.androidx.room3.compiler)
     implementation(libs.zxing.core)   // genera los códigos QR
+    implementation(libs.google.code.scanner)   // lee códigos QR con la cámara (código del profesor)
 }

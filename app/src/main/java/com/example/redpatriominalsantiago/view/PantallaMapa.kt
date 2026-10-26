@@ -27,9 +27,11 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.model.Templo
 import com.example.redpatriominalsantiago.ui.theme.AzulRio
 import com.example.redpatriominalsantiago.ui.theme.AzulUsuario
@@ -87,7 +90,7 @@ fun PantallaMapa(
 
             // Capa 2: buscador y filtros arriba
             Column(modifier = Modifier.padding(16.dp)) {
-                Buscador()
+                Buscador(onEscanear = { navController.navigate(Routes.ESCANER_QR) })
                 Spacer(modifier = Modifier.height(12.dp))
                 Filtros(
                     filtroElegido = mapaViewModel.filtro,
@@ -232,7 +235,7 @@ fun colorEstado(estado: String): Color {
 
 // Barra de búsqueda blanca con la inicial del perfil (T de Turista)
 @Composable
-fun Buscador() {
+fun Buscador(onEscanear: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -250,6 +253,10 @@ fun Buscador() {
             color = Color.DarkGray,
             modifier = Modifier.weight(1f)
         )
+        // Botón para escanear el QR de un templo
+        IconButton(onClick = onEscanear) {
+            Icon(Icons.Filled.QrCodeScanner, contentDescription = "Escanear QR", tint = Burdeo)
+        }
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
