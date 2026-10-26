@@ -38,7 +38,7 @@ import androidx.compose.material3.Icon
 
 
 
-@Composable
+@Composable         // funcion grafica: sin esto android no visualiza en pantalla
 fun PantallaIniciarSesion(
     iniciarSesionViewModel: IniciarSesionViewModel = viewModel(),
     navController: NavController
@@ -188,7 +188,7 @@ fun PantallaIniciarSesion(
         }
         TextButton(
             onClick = {
-                println("Boton Invitado presionado...")
+                navController.navigate(Routes.PERMISO_UBICACION)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
