@@ -42,9 +42,8 @@ class IniciarSesionViewModel(application: Application): AndroidViewModel(applica
 
     //val usuarioCorrecto = Usuario("admin@gmail.com", "123")
 
-    fun login(alTerminar: () -> Unit) { // cambié esto: ahora recibe qué hacer cuando el login sale bien
+    fun login(alTerminar: () -> Unit) {
 
-        // agregué esto para que no deje ingresar si el mail o la contraseña están vacíos
         if (mail == "" || pass == "") {
             println("CR7: No pude ingresar, faltan datos")
             textoVisible = true
@@ -58,7 +57,6 @@ class IniciarSesionViewModel(application: Application): AndroidViewModel(applica
 
                 if (usuario != null){
                     _loginCorrecto.value = true
-                    // cambié Sesion.nombre = usuario.nombre por esta línea, para que además de guardar el nombre deje la sesión guardada en el teléfono
                     Sesion.guardar(getApplication<Application>(), usuario.nombre)
                     println("CR7: Login OK")
                     alTerminar()

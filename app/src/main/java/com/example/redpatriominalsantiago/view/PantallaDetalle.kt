@@ -63,14 +63,15 @@ import com.example.redpatriominalsantiago.ui.theme.Fondo
 
 @Composable
 fun PantallaDetalle(navController: NavController, id: Int) {
-    // busca el lugar con ese id, si no lo encuentra usa el primero
+    // Lugar A Mostrar
     val lugar = lugaresEjemplo.find { it.id == id } ?: lugaresEjemplo[0]
     val context = LocalContext.current
-    var pestana by remember { mutableStateOf(0) } // 0 Historia, 1 Horarios, 2 Eventos, 3 Guías
+    // pestana elegida: 0 historia, 1 horarios, 2 eventos, 3 guias
+    var pestana by remember { mutableStateOf(0) }
     val enRuta = MiRuta.lugares.contains(lugar.id)
     val eventosLugar = eventosEjemplo.filter { it.lugar.contains(lugar.nombre) }
 
-    // agrega o quita el lugar de la ruta y avisa con un mensaje
+    // AGREGA O QUITA EL LUGAR DE LA RUTA
     val alternarRuta = {
         if (enRuta) MiRuta.lugares.remove(lugar.id) else MiRuta.lugares.add(lugar.id)
         val mensaje = if (enRuta) "Quitado de tu ruta" else "Agregado a tu ruta"
@@ -78,7 +79,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
         println("CR7: $mensaje: ${lugar.nombre}")
     }
 
-    // abre la app de mapas del teléfono buscando el lugar
+    // abre la app de mapas del telefono
     val comoLlegar = {
         println("CR7: Boton Como llegar presionado: ${lugar.nombre}")
         try {
@@ -94,7 +95,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
             .fillMaxSize()
             .background(Fondo)
     ) {
-        // parte de arriba: "foto" con ícono, botón volver y botón +
+        // Encabezado Con Boton Volver Y Boton +
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -142,7 +143,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
             }
         }
 
-        // contenido que se puede deslizar
+        // CONTENIDO DESLIZABLE
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -179,7 +180,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
                 )
             }
 
-            // dirección
+            // Direccion
             Spacer(modifier = Modifier.height(8.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
@@ -196,7 +197,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
                 )
             }
 
-            // botones
+            // BOTONES COMO LLEGAR Y RUTA
             Spacer(modifier = Modifier.height(12.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(
@@ -223,7 +224,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
                 }
             }
 
-            // pestañas
+            // pestanas para cambiar el contenido
             Spacer(modifier = Modifier.height(12.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
                 listOf("Historia", "Horarios", "Eventos", "Guías").forEachIndexed { i, nombre ->
@@ -250,7 +251,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
                 }
             }
 
-            // contenido de la pestaña elegida
+            // Contenido Segun La Pestana
             Spacer(modifier = Modifier.height(12.dp))
             when (pestana) {
                 0 -> {
@@ -261,7 +262,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
                         DatoCard(lugar.estilo, "Estilo", Modifier.weight(1f))
                         DatoCard("${lugar.guias.size} guías", "Disponibles", Modifier.weight(1f))
                     }
-                    // tarjeta del próximo evento de este lugar
+                    // PROXIMO EVENTO DEL LUGAR
                     val proximo = eventosLugar.firstOrNull()
                     if (proximo != null) {
                         Spacer(modifier = Modifier.height(12.dp))
@@ -311,7 +312,7 @@ fun PantallaDetalle(navController: NavController, id: Int) {
     }
 }
 
-// una cajita con un dato grande arriba y su nombre abajo (Año, Estilo, Guías)
+// caja con un dato grande y su nombre
 @Composable
 fun DatoCard(valor: String, etiqueta: String, modifier: Modifier) {
     Column(

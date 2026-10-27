@@ -9,9 +9,11 @@ object Routes {
     const val AGENDA = "agenda"
     const val BUSCAR = "buscar"
     const val DETALLE = "detalle/{id}"
+    // ARMA LA RUTA DEL DETALLE CON EL ID
     fun detalleDe(id: Int) = "detalle/$id"
     const val RUTAS = "rutas"
     const val RUTA = "ruta/{id}"
+    // Arma La Ruta Del Editor Con El Id
     fun rutaDe(id: Int) = "ruta/$id"
-    const val PERFIL = "perfil" // agregué la ruta de la pantalla de perfil
+    const val PERFIL = "perfil"
 }

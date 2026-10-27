@@ -124,7 +124,7 @@ fun PantallaPrincipal(
             }
         }
 
-        // Botón Omitir (al final para que quede encima)
+        // Botón Omitir
         TextButton(
             onClick = { navController.navigate(Routes.LOGIN) },
             modifier = Modifier

@@ -47,7 +47,7 @@ import com.example.redpatriominalsantiago.ui.theme.RosaSeleccion
 fun PantallaBuscar(navController: NavController) {
     var texto by remember { mutableStateOf("") }
 
-    // se recalculan cada vez que cambia el texto: dejan solo lo que lo contiene (sin importar mayúsculas)
+    // FILTRA LUGARES Y EVENTOS CON EL TEXTO ESCRITO
     val lugares = lugaresEjemplo.filter {
         it.nombre.contains(texto, ignoreCase = true) || it.comuna.contains(texto, ignoreCase = true)
     }
@@ -62,7 +62,7 @@ fun PantallaBuscar(navController: NavController) {
             .statusBarsPadding()
             .padding(16.dp)
     ) {
-        // flecha para volver y campo de texto
+        // flecha para volver y campo de busqueda
         Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = { navController.popBackStack() }) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Burdeo)
@@ -85,6 +85,7 @@ fun PantallaBuscar(navController: NavController) {
                 Text(text = "No se encontraron resultados", color = Color.Gray)
             }
 
+            // Lugares Encontrados
             if (lugares.isNotEmpty()) {
                 Text(text = "Lugares", fontWeight = FontWeight.Bold, color = Burdeo)
                 lugares.forEach { lugar ->
@@ -115,6 +116,7 @@ fun PantallaBuscar(navController: NavController) {
                 }
             }
 
+            // EVENTOS ENCONTRADOS
             if (eventos.isNotEmpty()) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "Eventos", fontWeight = FontWeight.Bold, color = Burdeo)
@@ -123,7 +125,7 @@ fun PantallaBuscar(navController: NavController) {
                     Box(
                         modifier = Modifier.clickable {
                             println("CR7: Evento presionado: ${evento.titulo}")
-                            // busca el lugar del evento y abre su detalle
+                            // abre el detalle del lugar del evento
                             val lugar = lugaresEjemplo.find { evento.lugar.contains(it.nombre) }
                             if (lugar != null) navController.navigate(Routes.detalleDe(lugar.id))
                         }

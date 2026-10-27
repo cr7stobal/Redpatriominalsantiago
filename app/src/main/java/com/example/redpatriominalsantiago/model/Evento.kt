@@ -10,7 +10,7 @@ data class Evento(
     val distancia: String
 )
 
-// lista de eventos de ejemplo (datos ficticios), el "lugar" empieza con el nombre del lugar para poder relacionarlos
+// LISTA DE EVENTOS DE EJEMPLO, EL LUGAR EMPIEZA CON EL NOMBRE DEL LUGAR PARA RELACIONARLOS
 val eventosEjemplo = listOf(
     Evento("Sábado 31 de octubre", "31", "OCT", "Concierto de música sacra", "Parroquia Santa Clara del Valle · San Bernardo", "19:30", "1,2 km"),
     Evento("Sábado 31 de octubre", "31", "OCT", "Exposición: Arte colonial en la periferia", "Museo Diocesano Sur · La Florida", "10:00–18:00", "6,8 km"),

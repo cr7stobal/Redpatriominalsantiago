@@ -1,7 +1,7 @@
 package com.example.redpatriominalsantiago.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable // agregué este import para poder usar .clickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,19 +46,19 @@ fun PantallaMapa(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BeigeIcono) // este fondo hace de "mapa"
+            .background(BeigeIcono)
     ) {
-        // mapa quieto: parques, río y calles
-        Forma(210, 150, 160, 110, Color(0xFFD3E6C0)) // parque
-        Forma(-10, 340, 130, 130, Color(0xFFD3E6C0)) // parque
-        Forma(-80, 290, 560, 36, Color(0xFFBFD9EE), -15f) // río, inclinado
-        Forma(0, 190, 400, 12, Color.White) // calle horizontal
-        Forma(0, 430, 400, 12, Color.White) // calle horizontal
-        Forma(80, 130, 12, 400, Color.White) // calle vertical
-        Forma(250, 130, 12, 400, Color.White) // calle vertical
-        Forma(-100, 250, 600, 8, Color.White, 25f) // calle diagonal
+        // MAPA QUIETO CON PARQUES, RIO Y CALLES
+        Forma(210, 150, 160, 110, Color(0xFFD3E6C0))
+        Forma(-10, 340, 130, 130, Color(0xFFD3E6C0))
+        Forma(-80, 290, 560, 36, Color(0xFFBFD9EE), -15f)
+        Forma(0, 190, 400, 12, Color.White)
+        Forma(0, 430, 400, 12, Color.White)
+        Forma(80, 130, 12, 400, Color.White)
+        Forma(250, 130, 12, 400, Color.White)
+        Forma(-100, 250, 600, 8, Color.White, 25f)
 
-        // pines de ejemplo sobre el "mapa"
+        // Pines De Ejemplo
         Icon(
             imageVector = Icons.Filled.LocationOn,
             contentDescription = null,
@@ -78,7 +78,7 @@ fun PantallaMapa(navController: NavController) {
             modifier = Modifier.size(40.dp).align(Alignment.Center).offset(x = 90.dp, y = 20.dp)
         )
 
-        // parte de arriba: nombre del usuario y buscador
+        // nombre del usuario y buscador
         Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
@@ -98,8 +98,6 @@ fun PantallaMapa(navController: NavController) {
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(30.dp))
                     .background(Color.White)
-                    // CAMBIO 1: agregué este clickable para que el buscador se pueda apretar y abra la pantalla de búsqueda
-                    // va entre .background y .padding, así toda la barra responde al toque
                     .clickable {
                         println("CR7: Buscador presionado")
                         navController.navigate(Routes.BUSCAR)
@@ -112,7 +110,7 @@ fun PantallaMapa(navController: NavController) {
                     color = Color.Gray,
                     modifier = Modifier.weight(1f).padding(start = 12.dp)
                 )
-                // circulo con la primera letra del nombre
+                // Circulo Con La Inicial Del Nombre
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier.size(36.dp).clip(CircleShape).background(Burdeo)
@@ -126,7 +124,7 @@ fun PantallaMapa(navController: NavController) {
             }
         }
 
-        // parte de abajo: tarjeta "Cerca de ti" y barra de navegacion
+        // tarjeta cerca de ti y barra de abajo
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -148,6 +146,7 @@ fun PantallaMapa(navController: NavController) {
                 Text(text = "12 recintos · 3 eventos hoy", fontSize = 12.sp, color = Color.Gray)
             }
 
+            // LUGAR CERCANO QUE ABRE SU DETALLE
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
@@ -155,8 +154,6 @@ fun PantallaMapa(navController: NavController) {
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
                     .background(RosaSeleccion)
-                    // CAMBIO 2: agregué este clickable para que la tarjeta abra el detalle de la parroquia (el lugar con id 1)
-                    // va entre .background y .padding, igual que en el buscador
                     .clickable {
                         println("CR7: Tarjeta Cerca de ti presionada")
                         navController.navigate(Routes.detalleDe(1))
@@ -184,7 +181,7 @@ fun PantallaMapa(navController: NavController) {
     }
 }
 
-// dibuja un rectángulo de color en la posición (x, y), con un tamaño y un giro opcional, sirve para armar el mapa
+// dibuja un rectangulo de color en una posicion
 @Composable
 fun Forma(x: Int, y: Int, ancho: Int, alto: Int, color: Color, giro: Float = 0f) {
     Box(

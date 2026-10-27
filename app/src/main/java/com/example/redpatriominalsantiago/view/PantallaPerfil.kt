@@ -63,7 +63,7 @@ fun PantallaPerfil(navController: NavController) {
     var guiaEscaneado by remember { mutableStateOf<Guia?>(null) }
     var mensajeQr by remember { mutableStateOf("") }
 
-    // abre el escáner de QR de Google, cuando lee un código busca al guía que tiene ese código
+    // ABRE EL ESCANER Y BUSCA AL GUIA DEL CODIGO LEIDO
     val escanearQr = {
         println("CR7: Boton Escanear QR presionado")
         GmsBarcodeScanning.getClient(context)
@@ -88,7 +88,7 @@ fun PantallaPerfil(navController: NavController) {
             }
     }
 
-    // borra la sesión guardada y vuelve a la pantalla del comienzo, el usuario sigue en la base de datos
+    // Borra La Sesion Y Vuelve Al Comienzo
     val cerrarSesion = {
         Sesion.cerrar(context)
         MiRuta.lugares.clear()
@@ -104,7 +104,7 @@ fun PantallaPerfil(navController: NavController) {
             .background(Fondo)
             .statusBarsPadding()
     ) {
-        // encabezado con la inicial y el nombre
+        // inicial y nombre del usuario
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth().padding(16.dp)
@@ -126,20 +126,20 @@ fun PantallaPerfil(navController: NavController) {
             }
         }
 
-        // contenido que se puede deslizar
+        // CONTENIDO DESLIZABLE
         Column(
             modifier = Modifier
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp)
         ) {
-            // resumen
+            // Resumen De Rutas
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 DatoCard("${RutasGuardadas.rutas.size}", "rutas guardadas", Modifier.weight(1f))
                 DatoCard("${MiRuta.lugares.size}", "en tu próxima ruta", Modifier.weight(1f))
             }
 
-            // lector de QR
+            // lector de qr de guias
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Guía voluntario", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(8.dp))
@@ -156,7 +156,7 @@ fun PantallaPerfil(navController: NavController) {
                 Text(text = mensajeQr, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
             }
 
-            // credencial del guía escaneado
+            // Credencial Del Guia Escaneado
             val guiaActual = guiaEscaneado
             if (guiaActual != null) {
                 Spacer(modifier = Modifier.height(12.dp))
@@ -199,7 +199,7 @@ fun PantallaPerfil(navController: NavController) {
                 }
             }
 
-            // historial de rutas
+            // HISTORIAL DE RUTAS
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Historial de rutas", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             if (RutasGuardadas.rutas.isEmpty()) {
@@ -233,7 +233,6 @@ fun PantallaPerfil(navController: NavController) {
                 }
             }
 
-            // cerrar sesión
             Spacer(modifier = Modifier.height(24.dp))
             OutlinedButton(
                 onClick = { cerrarSesion() },

@@ -73,7 +73,7 @@ fun PantallaIniciarSesion(
             .statusBarsPadding()
             .padding(24.dp)
     ) {
-        // bienvenida
+        // TITULO DE BIENVENIDA
         Row(
         ) {
             Text(
@@ -81,16 +81,14 @@ fun PantallaIniciarSesion(
                 fontSize = 30.sp,
                 color = Burdeo,
                 fontWeight = FontWeight.Bold,
-
-                )
+            )
         }
         // texto de bienvenida
         Row(
-
         ) {
             Text("Elige cómo usarás la Red Patrimonial para personalizar tu experiencia.")
         }
-        // elegir usuario
+        // Opciones Para Elegir El Tipo De Usuario
         val radioButtonUsuarios = listOf(
             PersonaIngreso(
                 icono = Icons.Filled.Person,
@@ -109,35 +107,35 @@ fun PantallaIniciarSesion(
             )
         )
 
-
         var selectButton = remember {
             mutableStateOf(radioButtonUsuarios.first())
         }
         Column(
             modifier = Modifier.selectableGroup()
         ) {
-            // cambié esto: antes era un RadioButton con un ícono y un texto, ahora es una tarjeta completa que se puede tocar
+            // UNA TARJETA POR CADA OPCION
             radioButtonUsuarios.forEach {
                 val isSelect = it == selectButton.value
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 3.dp) // cambié 4.dp por 3.dp para que haya menos espacio entre tarjetas
-                        .clip(RoundedCornerShape(12.dp)) // cambié 16.dp por 12.dp para que las esquinas combinen con una tarjeta más baja
+                        .padding(vertical = 3.dp)
+                        .clip(RoundedCornerShape(12.dp))
                         .background(if (isSelect) RosaSeleccion else Color.White)
                         .border(
                             width = if (isSelect) 2.dp else 1.dp,
                             color = if (isSelect) Burdeo else BordeSuave,
-                            shape = RoundedCornerShape(12.dp) // cambié 16.dp por 12.dp, debe ser igual al clip de arriba
+                            shape = RoundedCornerShape(12.dp)
                         )
                         .clickable { selectButton.value = it }
-                        .padding(horizontal = 8.dp, vertical = 6.dp) // cambié padding(8.dp) por este para dejar menos espacio arriba y abajo
+                        .padding(horizontal = 8.dp, vertical = 6.dp)
                 ) {
+                    // circulo con el icono
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .size(32.dp) // cambié 36.dp por 32.dp para que el círculo del ícono sea más chico
+                            .size(32.dp)
                             .clip(CircleShape)
                             .background(if (isSelect) Burdeo else BeigeIcono)
                     ) {
@@ -145,29 +143,27 @@ fun PantallaIniciarSesion(
                             imageVector = it.icono,
                             contentDescription = null,
                             tint = if (isSelect) Color.White else Burdeo,
-                            modifier = Modifier.size(18.dp) // agregué esto para que el ícono quepa bien en el círculo más chico
+                            modifier = Modifier.size(18.dp)
                         )
                     }
+                    // Nombre Y Descripcion
                     Column(
                         modifier = Modifier
                             .weight(1f)
-                            .padding(start = 10.dp) // cambié 12.dp por 10.dp
+                            .padding(start = 10.dp)
                     ) {
-                        Text(text = it.nombre, fontWeight = FontWeight.Bold, fontSize = 14.sp) // agregué fontSize 14.sp para achicar el nombre
-                        Text(text = it.descripcion, fontSize = 11.sp, color = Color.Gray) // cambié 12.sp por 11.sp
+                        Text(text = it.nombre, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Text(text = it.descripcion, fontSize = 11.sp, color = Color.Gray)
                     }
-                    // agregué el CompositionLocalProvider para quitarle al RadioButton el tamaño mínimo de 48.dp, que era lo que mantenía alta la tarjeta
-                        RadioButton(
-                            selected = isSelect,
-                            onClick = { selectButton.value = it },
-                            colors = RadioButtonDefaults.colors(selectedColor = Burdeo)
-                        )
-                    }
+                    RadioButton(
+                        selected = isSelect,
+                        onClick = { selectButton.value = it },
+                        colors = RadioButtonDefaults.colors(selectedColor = Burdeo)
+                    )
                 }
-
-
+            }
         }
-        // INGRESAR MAIL, CONTRASENA y registrarse
+        // campos de correo y contrasena
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
@@ -194,6 +190,7 @@ fun PantallaIniciarSesion(
                 },
                 modifier = Modifier.fillMaxWidth()
             )
+            // ENLACE PARA IR A REGISTRARSE
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -214,7 +211,7 @@ fun PantallaIniciarSesion(
                 }
             }
         }
-        // BOTONES
+        // Mensaje De Error Y Botones
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom,

@@ -55,7 +55,7 @@ fun PantallaGps(navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(40.dp))
 
-        // circulo con el icono de ubicacion (reemplaza al mapa)
+        // Icono De Ubicacion En Circulo
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -96,13 +96,13 @@ fun PantallaGps(navController: NavController) {
         Spacer(modifier = Modifier.height(12.dp))
         ItemGps(Icons.Filled.Route, "Trazar tus rutas patrimoniales en terreno")
 
-        // empuja los botones hacia abajo
+        // EMPUJA LOS BOTONES HACIA ABAJO
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
             onClick = {
                 println("CR7: Boton Permitir ubicacion presionado")
-                // cambié navController.navigate(Routes.MAPA) por esto: borra presentación, login y gps del historial, así el botón atrás en el mapa cierra la app y no vuelve al login
+                // ir al mapa y borrar el historial
                 navController.navigate(Routes.MAPA) {
                     popUpTo(Routes.PRESENTACION) { inclusive = true }
                 }
@@ -124,7 +124,7 @@ fun PantallaGps(navController: NavController) {
         TextButton(
             onClick = {
                 println("CR7: Boton Ahora no presionado")
-                // cambié navController.navigate(Routes.MAPA) por esto: borra presentación, login y gps del historial, así el botón atrás en el mapa cierra la app y no vuelve al login
+                // Ir Al Mapa Y Borrar El Historial
                 navController.navigate(Routes.MAPA) {
                     popUpTo(Routes.PRESENTACION) { inclusive = true }
                 }
@@ -142,7 +142,7 @@ fun PantallaGps(navController: NavController) {
     }
 }
 
-// una fila con icono en circulo rosado y un texto al lado
+// FILA CON ICONO Y TEXTO
 @Composable
 private fun ItemGps(icono: ImageVector, texto: String) {
     Row(

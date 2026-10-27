@@ -15,7 +15,7 @@ import com.example.redpatriominalsantiago.view.PantallaDetalle
 import com.example.redpatriominalsantiago.view.PantallaGps
 import com.example.redpatriominalsantiago.view.PantallaIniciarSesion
 import com.example.redpatriominalsantiago.view.PantallaMapa
-import com.example.redpatriominalsantiago.view.PantallaPerfil // agregué
+import com.example.redpatriominalsantiago.view.PantallaPerfil
 import com.example.redpatriominalsantiago.view.PantallaPrincipal
 import com.example.redpatriominalsantiago.view.PantallaRegistro
 import com.example.redpatriominalsantiago.view.PantallaRuta
@@ -26,6 +26,7 @@ fun AppNavigation() {
     val navController = rememberNavController()
 
     val context = LocalContext.current
+    // decide con que pantalla abre la app
     val inicio = remember {
         Sesion.cargar(context)
         if (Sesion.iniciada) Routes.MAPA else Routes.PRESENTACION
@@ -42,6 +43,7 @@ fun AppNavigation() {
         composable(Routes.MAPA) { PantallaMapa(navController) }
         composable(Routes.AGENDA) { PantallaAgenda(navController) }
         composable(Routes.BUSCAR) { PantallaBuscar(navController) }
+        // RECIBE EL ID DEL LUGAR A MOSTRAR
         composable(
             route = Routes.DETALLE,
             arguments = listOf(navArgument("id") { type = NavType.IntType })
@@ -50,6 +52,7 @@ fun AppNavigation() {
             PantallaDetalle(navController, id)
         }
         composable(Routes.RUTAS) { PantallaRutas(navController) }
+        // Recibe El Id De La Ruta A Editar
         composable(
             route = Routes.RUTA,
             arguments = listOf(navArgument("id") { type = NavType.IntType })
@@ -57,6 +60,6 @@ fun AppNavigation() {
             val id = entrada.arguments?.getInt("id") ?: 0
             PantallaRuta(navController, id)
         }
-        composable(Routes.PERFIL) { PantallaPerfil(navController) } // agregué la pantalla de perfil
+        composable(Routes.PERFIL) { PantallaPerfil(navController) }
     }
 }

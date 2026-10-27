@@ -14,7 +14,7 @@ data class Lugar(
     val guias: List<String>
 )
 
-// lugares de ejemplo (datos ficticios)
+// Lugares De Ejemplo Con Datos Ficticios
 val lugaresEjemplo = listOf(
     Lugar(
         id = 1,

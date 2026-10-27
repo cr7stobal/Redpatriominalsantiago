@@ -19,7 +19,7 @@ import com.example.redpatriominalsantiago.ui.theme.RosaSeleccion
 
 @Composable
 fun BarraInferior(seleccionado: String, navController: NavController) {
-    // cambia de pantalla sin apilar la misma pantalla muchas veces
+    // cambia de pantalla
     val irA = { ruta: String ->
         navController.navigate(ruta) {
             popUpTo(Routes.MAPA)
@@ -27,13 +27,13 @@ fun BarraInferior(seleccionado: String, navController: NavController) {
         }
     }
 
-    // colores de la barra: el elegido va en rosado y burdeo
     val colores = NavigationBarItemDefaults.colors(
         indicatorColor = RosaSeleccion,
         selectedIconColor = Burdeo,
         selectedTextColor = Burdeo
     )
 
+    // Botones De La Barra De Abajo
     NavigationBar(containerColor = Color.White) {
         NavigationBarItem(
             selected = seleccionado == Routes.MAPA,
@@ -57,8 +57,8 @@ fun BarraInferior(seleccionado: String, navController: NavController) {
             colors = colores
         )
         NavigationBarItem(
-            selected = seleccionado == Routes.PERFIL, // cambié false por esta comparación para que Perfil se marque cuando estás en esa pantalla
-            onClick = { irA(Routes.PERFIL) }, // cambié el println por la navegación a la pantalla de perfil
+            selected = seleccionado == Routes.PERFIL,
+            onClick = { irA(Routes.PERFIL) },
             icon = { Icon(Icons.Filled.Person, contentDescription = null) },
             label = { Text("Perfil") },
             colors = colores

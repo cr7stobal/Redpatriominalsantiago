@@ -73,7 +73,7 @@ fun PantallaAgenda(navController: NavController) {
             }
         }
 
-        // filtros
+        // BOTONES DE FILTRO
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -83,7 +83,7 @@ fun PantallaAgenda(navController: NavController) {
             Filtro("Música sacra", Icons.Filled.MusicNote, false)
         }
 
-        // lista que se puede deslizar, ocupa el espacio que queda entre los filtros y la barra de abajo
+        // Lista Que Se Puede Deslizar
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -107,7 +107,7 @@ fun PantallaAgenda(navController: NavController) {
                 )
             }
 
-            // agrupa los eventos por fecha y dibuja un titulo de fecha y sus tarjetas
+            // AGRUPA LOS EVENTOS POR FECHA
             eventosEjemplo.groupBy { it.fecha }.forEach { (fecha, lista) ->
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = fecha, fontWeight = FontWeight.SemiBold, color = Color.DarkGray)
@@ -122,7 +122,6 @@ fun PantallaAgenda(navController: NavController) {
     }
 }
 
-// un boton redondeado de filtro, con icono y texto
 @Composable
 private fun Filtro(texto: String, icono: ImageVector, seleccionado: Boolean) {
     Row(
@@ -139,9 +138,8 @@ private fun Filtro(texto: String, icono: ImageVector, seleccionado: Boolean) {
     }
 }
 
-// la tarjeta de un evento: fecha a la izquierda y datos a la derecha
 @Composable
-fun TarjetaEvento(evento: Evento) { // cambié "private fun" por "fun" para poder usar esta tarjeta también en PantallaDetalle y PantallaBuscar
+fun TarjetaEvento(evento: Evento) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier

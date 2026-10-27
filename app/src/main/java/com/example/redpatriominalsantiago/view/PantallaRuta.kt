@@ -96,7 +96,7 @@ fun PantallaRuta(navController: NavController, id: Int) {
             println("CR7: No se pudo guardar la ruta, faltan paradas")
         } else {
             RutasGuardadas.guardar(id, nombre, paradas.toList(), guia)
-            if (id == 0) MiRuta.lugares.clear() // la ruta nueva ya quedó guardada, se vacía la lista de armado
+            if (id == 0) MiRuta.lugares.clear()
             Toast.makeText(context, "Ruta guardada", Toast.LENGTH_SHORT).show()
             println("CR7: Ruta guardada: $nombre")
             navController.popBackStack()
