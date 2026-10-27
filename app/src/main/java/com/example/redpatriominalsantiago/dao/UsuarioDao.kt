@@ -22,6 +22,10 @@ interface UsuarioDao {
     @Query("SELECT * FROM usuario ORDER by id DESC")
     fun usuarioListar(): Flow<List<Usuario>>
 
+    // CAMBIO: busca un usuario por su correo (sirve para saber si ya existe)
+    @Query("SELECT * FROM usuario WHERE mail = :mail LIMIT 1")
+    suspend fun usuarioPorMail(mail: String): Usuario?
+
     @Query("""
         SELECT * FROM usuario
         WHERE mail = :mail AND pass = :pass

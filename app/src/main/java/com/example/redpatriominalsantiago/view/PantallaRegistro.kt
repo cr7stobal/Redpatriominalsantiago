@@ -27,16 +27,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.redpatriominalsantiago.navigation.Routes
 import com.example.redpatriominalsantiago.ui.theme.Burdeo
 import com.example.redpatriominalsantiago.ui.theme.Crema
 import com.example.redpatriominalsantiago.ui.theme.Dorado
+import com.example.redpatriominalsantiago.viewmodel.RegistroViewModel
 
 
 @Composable
 fun PantallaRegistro(
-navController: NavController
+    navController: NavController,
+    registroViewModel: RegistroViewModel = viewModel()
 ){
     Scaffold(
         topBar = {
@@ -75,42 +78,48 @@ navController: NavController
             color = Burdeo
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = registroViewModel.nombre,
+            onValueChange = {registroViewModel.cambiarNombre(it)},
             label = {
                 Text("Nombre")
             },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = registroViewModel.mail,
+            onValueChange = {registroViewModel.cambiarMail(it)},
             label = {
                 Text("Corre electronico")
             },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = registroViewModel.pass,
+            onValueChange = {registroViewModel.cambiarPass(it)},
             label = {
                 Text("Contrasena")
             },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = registroViewModel.pass2,
+            onValueChange = {registroViewModel.cambiarPass2(it)},
             label = {
                 Text("Confirmar contrasena")
             },
             modifier = Modifier.fillMaxWidth()
         )
+        if (registroViewModel.mensaje != "") {
+            Text(
+                text = registroViewModel.mensaje,
+                color = Color.Red
+            )
+        }
         Spacer(
             modifier = Modifier.height(15.dp)
         )
         Button(
-            onClick = {navController.navigate(Routes.LOGIN)},
+            onClick = {registroViewModel.usuarioAlmacenar { navController.popBackStack()}},
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Burdeo,
